@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <link rel="stylesheet" href="/static/css/register.css">
+</head>
+<body>
+  <img src="/static/img/MAKSO-LOGO.png" class="logo-above" alt="Logo">
+  
+  <div class="wrapper">
+    <form method="post" action="/register">
+      <h3>Register</h3>
+
+      <div class="input-field">
+        <input type="text" name="firstName" required>
+        <label>First Name</label>
+      </div>
+    
+      <div class="input-field">
+        <input type="text" name="lastName" required>
+        <label>Last Name</label>
+      </div>
+
+      <div class="input-field">
+        <input type="email" name="email_address" required>
+        <label>Email</label>
+      </div>
+
+      <div class="input-field">
+        <input type="text" name="phone" required>
+        <label>Phone</label>
+      </div>
+
+      <div class="input-field">
+        <input type="password" name="password" required>
+        <label>Password</label>
+      </div>
+
+      <div class="input-field">
+        <input type="password" name="repeatpassword" required>
+        <label>Repeat Password</label>
+      </div>
+
+      <input type="hidden" name="csrf_token" value="{{csrf_token}}">
+
+      <button type="submit">Register</button>
+    </form>
+  </div>
+</body>
+</html>

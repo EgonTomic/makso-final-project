@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block extra_css %}
+  <link rel="stylesheet" href="/static/css/order.css">
+{% endblock %}
+{% block content %}
+
+<div class="welcome-elements">
+  <h1>Welcome {{customer.firstName}},</h1>
+  <h4>Let us be ready for your next order</h4>
+</div>
+
+<div class="order-form-wrapper">
+  <form method="POST" action="/order">
+
+    <input type="hidden" name="csrf_token" value="{{csrf_token}}">
+
+    <label for="service">Choose a service:</label>
+    <select name="service" id="service" required>
+      <option value="" disabled selected>Select service</option>
+      <option value="VIP Treatment">VIP Treatment - 36€</option>
+      <option value="Modern Haircut + Beard Styling">Modern Haircut + Beard Styling - 28€</option>
+      <option value="Long Haircut">Long haircut - 22€</option>
+      <option value="Modern Haircut + Hair Wash">Modern Haircut + Hair Wash - 22€</option>
+      <option value="Modern Haircut">Modern Haircut - 18€</option>
+      <option value="Buzz Cut + Beard Styling">Buzz Cut + Beard Styling - 23€</option>
+      <option value="Buzz Cut">Buzz Cut - 13€</option>
+      <option value="Hot Towel Shave">Hot Towel Shave - 13€</option>
+      <option value="Beard Styling">Beard Styling - 10€</option>
+      <option value="Machine Shave">Machine Shave - 5€</option>
+      <option value="Beard Coloring">Beard Coloring - 7€</option>
+    </select>
+
+    <label for="date">Choose date:</label>
+    <input type="date" name="date" id="date" required min="{{ current_date }}">
+
+    <label for="time">Choose time:</label>
+    <select name="time" id="time" required>
+      <option value="" disabled selected>Select time</option>
+    </select>
+
+    <button type="submit" class="submit-button">Confirm Appointment</button>
+  </form>
+</div>
+
+<img src="/static/img/makso-index-img.png" alt="makso-index-img" id="makso-index-img">
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const dateInput = document.getElementById("date");
+  const timeSelect = document.getElementById("time");
+
+  const today = new Date().toISOString().split("T")[0];
+  dateInput.setAttribute("min", today);
+
+  let fullDates = [];
+
+  fetch("/full-days")
+    .then(response => response.json())
+    .then(data => {
+      fullDates = data;
+    });
+
+  dateInput.addEventListener("change", () => {
+    const selectedDate = dateInput.value;
+    if (!selectedDate) return;
+
+    if (fullDates.includes(selectedDate)) {
+      alert("All appointments for this date are taken or expired. Please choose another date.");
+      dateInput.value = "";
+      timeSelect.innerHTML = "";
+      return;
+    }
+
+    fetch(`/available-times?date=${selectedDate}`)
+      .then(response => response.json())
+      .then(times => {
+        timeSelect.innerHTML = "";
+
+        if (times.length === 0) {
+          const option = document.createElement("option");
+          option.text = "No available times";
+          option.disabled = true;
+          timeSelect.appendChild(option);
+          return;
+        }
+
+        const defaultOption = document.createElement("option");
+        defaultOption.text = "Select time";
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+        timeSelect.appendChild(defaultOption);
+
+        times.forEach(time => {
+          const option = document.createElement("option");
+          option.value = time;
+          option.text = time;
+          timeSelect.appendChild(option);
+        });
+      });
+  });
+});
+</script>
+
+{% endblock content %}

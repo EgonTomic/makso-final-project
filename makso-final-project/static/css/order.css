@@ -1,0 +1,141 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #0D0D0D;
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background-color: #0D0D0D;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.img-navbar {
+  width: 100px;
+}
+
+.nav_links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+a {
+    font-size: 16px;
+    color: #edf0f1;
+    text-decoration: none;
+}
+
+li {
+    font-size: 16px;
+    color: #edf0f1;
+    text-decoration: none;
+}
+
+.welcome-elements {
+  margin-top: 140px;
+  padding-left: 120px;
+  color: #fff;
+}
+
+.welcome-elements h1 {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.welcome-elements h4 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #ccc;
+}
+
+#makso-index-img {
+  position: fixed;
+  bottom: 0;
+  right: 40px;
+  width: 80vw;
+  max-width: 800px;
+  opacity: 0.9;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.order-form-wrapper {
+  margin-top: 40px;
+  background-color: #1A1A1A;
+  padding: 30px;
+  border-radius: 12px;
+  width: 400px;
+  margin-left: 120px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px);
+}
+
+.order-form-wrapper form {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-form-wrapper label {
+  color: #fff;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.order-form-wrapper input,
+.order-form-wrapper select {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 3px;
+  border: none;
+  outline: none;
+  background-color: #f2f2f2;
+  color: #000;
+  margin-bottom: 15px;
+}
+
+.submit-button {
+  background-color: #fff;
+  color: #000;
+  font-weight: 600;
+  border: none;
+  padding: 12px 20px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 16px;
+  border: 2px solid transparent;
+  transition: 0.3s ease;
+  margin-top: 20px;
+}
+
+.submit-button:hover {
+  color: #fff;
+  border-color: #fff;
+  background: #1A1A1A;
+}

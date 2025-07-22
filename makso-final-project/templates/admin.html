@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block extra_css %}
+  <link rel="stylesheet" href="/static/css/admin.css">
+{% endblock %}
+{% block content %}
+<header>
+    <nav>
+        <img class="img-navbar" src="/static/img/MAKSO-LOGO.png" alt="logo">
+        <ul class="nav_links">
+            <li class="li-navbar"><a class="a-navbar" href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="table-wrapper">
+    <h2>All orders</h2>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 35%;">Customer Name</th>
+                <th style="width: 35%;">Phone</th>
+                <th style="width: 35%;">Service</th>
+                <th style="width: 15%;">Price (€)</th>
+                <th style="width: 20%;">Status</th>
+                <th style="width: 30%;">Date & Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.customer.firstName }} {{ order.customer.lastName }}</td>
+                <td>{{ order.customer.phone }}</td>
+                <td>{{ order.service }}</td>
+                <td>{{ "%.2f"|format(order.price) }}</td>
+                <td>{{ order.status }}</td>
+                <td>{{ order.datetime.strftime('%d.%m.%Y. %H:%M') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
